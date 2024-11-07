@@ -19,3 +19,22 @@ make defconfig
 make download -j$(nproc)
 make -j$(nproc) V=s
 ```
+
+sudo make -j1 V=s FORCE_UNSAFE_CONFIGURE=1 2>&1 | ccze -A
+sudo make -j1 V=s 2>&1 | ccze -A
+
+
+sudo make clean
+sudo make oldconfig
+sudo make -j1 V=s
+
+sudo make menuconfig
+
+sudo ./scripts/feeds update -a
+sudo ./scripts/feeds install -a
+
+sudo make -j1 V=s prepare
+sudo make download -j1 V=s
+sudo make -j1 V=s package/lua-maxminddb/compile
+sudo make -j1 V=s package/luci-app-vssr/compile
+sudo make -j1 V=s package/luci-app-passwall/compile
